@@ -5,37 +5,108 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Miraç Korkmaz - Portfolyo</title>
     <style>
-        body {
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            background-color: #121212;
-            color: #e0e0e0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
         }
 
-        /* Üst Kısım - Typewriter Animasyonu */
-        .hero {
-            height: 40vh;
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            /* Arka plan görselini buradan çekiyor. bg.jpg adında bir fotoğraf yüklemelisin */
+            background: url('bg.jpg') center/cover no-repeat fixed;
+            background-color: #121212; /* Fotoğraf yüklenene kadar görünecek renk */
+            color: #fff;
+            display: flex;
+            min-height: 100vh;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        /* Ana Buzlu Cam (Glassmorphism) Efekti */
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Sol Kenar Çubuğu (Sidebar) */
+        .sidebar {
+            width: 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 0;
+            flex-shrink: 0;
+        }
+
+        .sidebar-logo {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #fff;
+            margin-bottom: auto;
+            letter-spacing: 1px;
+        }
+
+        .social-icons {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin-bottom: auto;
+        }
+
+        .social-icons a {
+            color: rgba(255, 255, 255, 0.6);
+            transition: all 0.3s ease;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: 'Courier New', Courier, monospace;
-            border-bottom: 1px solid #333;
+        }
+
+        .social-icons a:hover {
+            color: #fff;
+            transform: scale(1.1);
+        }
+
+        .social-icons svg {
+            width: 26px;
+            height: 26px;
+            fill: currentColor;
+        }
+
+        /* Ana İçerik Alanı */
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 1400px;
+        }
+
+        /* Üst Terminal Animasyon Kartı */
+        .hero-card {
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            min-height: 180px;
         }
 
         .typewriter-container {
+            font-family: 'Courier New', Courier, monospace;
             font-size: 2rem;
             font-weight: 500;
-            text-align: center;
             white-space: pre-wrap;
+            line-height: 1.5;
         }
 
         .cursor {
             display: inline-block;
             width: 3px;
             height: 1.1em;
-            background-color: #00ffcc;
+            background-color: #fff;
             vertical-align: text-bottom;
             margin-left: 5px;
             animation: blink 0.8s step-end infinite;
@@ -46,149 +117,114 @@
             50% { opacity: 0; }
         }
 
-        /* İçerik Bölümleri */
-        .content-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 50px 20px;
+        /* İçerik Kartları Izgarası */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            flex-grow: 1;
         }
 
-        .section {
+        .content-card {
+            padding: 30px;
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 40px;
-            margin-bottom: 80px;
+            flex-direction: column;
+            gap: 20px;
         }
 
-        .section.reverse {
-            flex-direction: row-reverse; /* Fotoğraf solda, yazı sağda */
+        .card-text h2 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
         }
 
-        .section img {
-            width: 45%;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        .card-text p {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 250px;
+            border-radius: 16px;
             object-fit: cover;
-        }
-
-        .section-text {
-            width: 50%;
-        }
-
-        .section-text h2 {
-            color: #00ffcc;
-            margin-top: 0;
-        }
-
-        /* Sosyal Medya İkonları */
-        .socials {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            padding: 40px 0 60px 0;
-        }
-
-        .socials a {
-            color: #a0a0a0;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.1rem;
-            transition: color 0.3s ease;
-        }
-
-        .socials a:hover {
-            color: #00ffcc;
-        }
-
-        .icon {
-            width: 24px;
-            height: 24px;
-            fill: none;
-            stroke: currentColor;
-            stroke-width: 2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: auto;
         }
 
         /* Mobil Uyumluluk */
-        @media (max-width: 768px) {
-            .hero {
-                height: 30vh;
-            }
-            .typewriter-container {
-                font-size: 1.2rem;
-            }
-            .section, .section.reverse {
-                flex-direction: column;
-                text-align: center;
-                gap: 20px;
-            }
-            .section img, .section-text {
-                width: 100%;
-            }
+        @media (max-width: 900px) {
+            body { flex-direction: column; padding: 10px; }
+            .sidebar { width: 100%; flex-direction: row; justify-content: space-between; padding: 15px 30px; border-radius: 20px; }
+            .social-icons { flex-direction: row; margin: 0; }
+            .sidebar-logo { margin: 0; }
+            .cards-grid { grid-template-columns: 1fr; }
+            .typewriter-container { font-size: 1.3rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Typewriter Efekti -->
-    <div class="hero">
-        <div class="typewriter-container">
-            <span id="text"></span><span class="cursor"></span>
-        </div>
-    </div>
-
-    <!-- İçerik Bölümü -->
-    <div class="content-container">
+    <!-- Sol Kenar Çubuğu (Glassmorphism) -->
+    <div class="sidebar glass">
+        <div class="sidebar-logo">MK</div>
         
-        <!-- Birinci Bölüm: Yazı Solda, Fotoğraf Sağda -->
-        <div class="section">
-            <div class="section-text">
-                <h2>Uçuş ve Dron Projeleri</h2>
-                <p>FPV uçuş deneyimlerim, otonom sistemler üzerine çalışmalarım ve dron dünyasına dair heyecan verici projelerim çok yakında burada olacak. Havadan çekilmiş yeni görüntüler ve teknik detaylar için takipte kalın.</p>
-            </div>
-            <!-- Dron fotoğrafının adını buraya yazmalısın. Örn: dron.jpg -->
-            <img src="dron.jpg" alt="Dron Projeleri">
+        <div class="social-icons">
+            <!-- Instagram İkonu -->
+            <a href="https://instagram.com/mirac.krkmz" target="_blank" title="Instagram: mirac.krkmz">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+                </svg>
+            </a>
+            
+            <!-- GitHub İkonu -->
+            <a href="https://github.com/mirackorkmaz" target="_blank" title="GitHub: mirackorkmaz">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+            </a>
         </div>
-
-        <!-- İkinci Bölüm: Fotoğraf Solda, Yazı Sağda -->
-        <div class="section reverse">
-            <div class="section-text">
-                <h2>3D Pixel Art Tasarımlar</h2>
-                <p>3D yazıcı ile ürettiğim çok renkli pixel art anahtarlıklar, tasarım süreçlerim ve özel modeller yakında bu sayfada yerini alacak. Hem dijital modelleme hem de fiziksel üretim aşamalarını detaylarıyla paylaşacağım.</p>
-            </div>
-            <!-- Anahtarlık fotoğrafının adını buraya yazmalısın. Örn: anahtarlik.png -->
-            <img src="anahtarlik.jpg" alt="3D Anahtarlık">
-        </div>
-
     </div>
 
-    <!-- Sosyal Medya İkonları -->
-    <div class="socials">
-        <!-- Instagram -->
-        <a href="https://instagram.com/mirac.krkmz" target="_blank">
-            <svg class="icon" viewBox="0 0 24 24">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-            </svg>
-            mirac.krkmz
-        </a>
+    <!-- Sağ İçerik Alanı -->
+    <div class="main-content">
         
-        <!-- GitHub -->
-        <a href="https://github.com/mirackorkmaz" target="_blank">
-            <svg class="icon" viewBox="0 0 24 24">
-                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-            </svg>
-            mirackorkmaz
-        </a>
+        <!-- Üst Yazı Kartı -->
+        <div class="hero-card glass">
+            <div class="typewriter-container">
+                <span id="text"></span><span class="cursor"></span>
+            </div>
+        </div>
+
+        <!-- Alt 2'li İçerik Izgarası -->
+        <div class="cards-grid">
+            
+            <!-- Sol Kart (Dron) -->
+            <div class="content-card glass">
+                <div class="card-text">
+                    <h2>Uçuş ve Dron Projeleri</h2>
+                    <p>FPV uçuş deneyimlerim, otonom sistemler üzerine çalışmalarım ve dron dünyasına dair heyecan verici projelerim çok yakında burada olacak. Havadan çekilmiş yeni görüntüler ve teknik detaylar için takipte kalın.</p>
+                </div>
+                <img src="dron.jpg" alt="Dron Projeleri" class="card-image">
+            </div>
+
+            <!-- Sağ Kart (3D Tasarım) -->
+            <div class="content-card glass">
+                <div class="card-text">
+                    <h2>3D Pixel Art Tasarımlar</h2>
+                    <p>3D yazıcı ile ürettiğim çok renkli pixel art anahtarlıklar, tasarım süreçlerim ve özel modeller yakında bu sayfada yerini alacak. Hem dijital modelleme hem de fiziksel üretim aşamalarını detaylarıyla paylaşacağım.</p>
+                </div>
+                <img src="anahtarlik.jpg" alt="3D Anahtarlık" class="card-image">
+            </div>
+
+        </div>
     </div>
 
+    <!-- Typewriter Script -->
     <script>
-        const text = "Miraç Korkmaz\nYakında yeni içeriklerle yayında...";
+        const text = "Miraç Korkmaz - Bilgisayar Mühendisi\nYakında yeni içeriklerle yayında...";
         let charIndex = 0;
         let isDeleting = false;
         const textElement = document.getElementById("text");
