@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miraç Korkmaz - Portfolyo</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #121212;
+            color: #e0e0e0;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .typewriter-container {
+            font-size: 2rem;
+            font-weight: 500;
+            white-space: pre-wrap; /* \n karakterinin alt satıra geçmesini sağlar */
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1.1em;
+            background-color: #00ffcc;
+            vertical-align: text-bottom;
+            margin-left: 5px;
+            animation: blink 0.8s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        @media (max-width: 768px) {
+            .typewriter-container {
+                font-size: 1.2rem;
+                padding: 0 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="typewriter-container">
+        <span id="text"></span><span class="cursor"></span>
+    </div>
+
+    <script>
+        // \n karakteri metnin ikinci kısmını alt satıra atar
+        const text = "Miraç Korkmaz - Bilgisayar Mühendisi\nYakında yayında...";
+        
+        let charIndex = 0;
+        let isDeleting = false;
+        const textElement = document.getElementById("text");
+
+        function typeWriter() {
+            // Ekrana yazdırılacak kısmı güncelle
+            textElement.textContent = text.substring(0, charIndex);
+            
+            // Hız ayarları (Yazarken 100ms, silerken 50ms)
+            let delay = isDeleting ? 50 : 100;
+
+            if (!isDeleting) {
+                charIndex++;
+                // Yazma tamamlandığında 2 saniye bekle ve silmeye geç
+                if (charIndex > text.length) {
+                    isDeleting = true;
+                    delay = 2000; 
+                }
+            } else {
+                charIndex--;
+                // Silme tamamlandığında yarım saniye bekle ve tekrar yaz
+                if (charIndex === 0) {
+                    isDeleting = false;
+                    delay = 500; 
+                }
+            }
+
+            // Sadece tek bir zamanlayıcı tetiklenir, hızlanma hatası oluşmaz
+            setTimeout(typeWriter, delay);
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            setTimeout(typeWriter, 1000);
+        });
+    </script>
+
+</body>
+</html>
