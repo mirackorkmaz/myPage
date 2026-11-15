@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Miraç Korkmaz - Portfolyo</title>
-    <!-- Modern, inovatif ve italik destekli Montserrat fontu eklendi -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,800&display=swap" rel="stylesheet">
+    <!-- Görseldeki tasarıma uygun Playfair Display (Büyük) ve Inter (Küçük) fontları eklendi -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', sans-serif; /* Sitedeki tüm küçük yazılar için Inter fontu */
             overflow-x: hidden;
             background-color: #f0f0f0;
         }
@@ -44,7 +44,8 @@
         }
 
         .sidebar-logo {
-            font-weight: bold; font-size: 1.2rem; color: #fff; margin-bottom: auto; letter-spacing: 1px;
+            font-family: 'Playfair Display', serif;
+            font-weight: 900; font-size: 1.4rem; color: #fff; margin-bottom: auto; letter-spacing: 1px;
         }
 
         .social-icons {
@@ -75,11 +76,10 @@
 
         /* Yeni Font ve Renk ile Dinamik Yazı Alanı */
         .adventure-text-container {
-            font-family: 'Montserrat', sans-serif; /* Yeni inovatif font */
-            font-style: italic; /* Eğik duruş eklendi */
+            font-family: 'Playfair Display', serif; /* Büyük başlık fontu */
             font-size: 10rem;
             font-weight: 800;
-            color: #000000; /* Daha açık, yumuşak bir siyah/antrasit tonu */
+            color: #3b3b3b; 
             letter-spacing: -2px;
             text-shadow: 0 10px 30px rgba(255, 255, 255, 0.8);
             display: flex;
@@ -91,7 +91,7 @@
             display: inline-block;
             width: 8px; 
             height: 0.9em;
-            background-color: #000000; /* Yazı rengiyle uyumlu hale getirildi */
+            background-color: #3b3b3b;
             margin-left: 10px;
             vertical-align: text-bottom;
             animation: blink 0.8s step-end infinite;
@@ -155,8 +155,20 @@
             color: #fff;
         }
 
-        .card-text h2 { font-size: 1.8rem; font-weight: 600; margin-bottom: 10px; color: #00ffcc; }
-        .card-text p { font-size: 1.05rem; color: rgba(255, 255, 255, 0.85); line-height: 1.7; }
+        .card-text h2 { 
+            font-family: 'Playfair Display', serif; /* Kart başlıkları da editoryal uyum için büyük fontta */
+            font-size: 2rem; 
+            font-weight: 700; 
+            margin-bottom: 10px; 
+            color: #00ffcc; 
+        }
+        
+        .card-text p { 
+            font-size: 1.05rem; 
+            color: rgba(255, 255, 255, 0.85); 
+            line-height: 1.7; 
+            font-weight: 400; /* Paragraflar Inter fontunda okunaklı */
+        }
         
         .card-image {
             width: 100%; height: 300px; border-radius: 16px; object-fit: cover;
@@ -181,7 +193,7 @@
             .sidebar { position: static; width: 100%; flex-direction: row; justify-content: space-between; padding: 15px 30px; margin-bottom: 20px; height: auto;}
             .main-wrapper { margin-left: 0; width: 100%; padding: 0 20px; }
             .hero-section { height: 80vh; }
-            .adventure-text-container { font-size: 5rem; } 
+            .adventure-text-container { font-size: 4.5rem; } 
             .cursor-large { width: 4px; margin-left: 6px; }
             .cards-grid { grid-template-columns: 1fr; }
             .content-section { padding: 0 0 100px 0; }
@@ -239,7 +251,6 @@
         </div>
     </div>
 
-    <!-- Hata Düzeltilmiş Animasyon Scripti -->
     <script>
         const words = ["Explore.", "Discover.", "Ascend.", "Adventure."];
         let wordIndex = 0;
@@ -249,38 +260,30 @@
 
         function typeWriter() {
             const currentWord = words[wordIndex];
-            
-            // Ekrana yazılacak metni güncelle
             textElement.textContent = currentWord.substring(0, charIndex);
             
-            // Hız ayarları (Yazarken 120ms, Silerken 60ms)
             let delay = isDeleting ? 60 : 120;
 
             if (!isDeleting) {
-                // Yazma İşlemi
                 if (charIndex < currentWord.length) {
                     charIndex++;
                 } else {
-                    // Kelime tamamen ekrana yazıldığında 2.5 saniye bekle
                     isDeleting = true;
                     delay = 2500; 
                 }
             } else {
-                // Silme İşlemi
                 if (charIndex > 0) {
                     charIndex--;
                 } else {
-                    // İlk harf de tamamen silindikten (boş ekran) sonra bekle ve kelime değiştir
                     isDeleting = false;
                     wordIndex = (wordIndex + 1) % words.length; 
-                    delay = 800; // Boş imleç ekranında 0.8 saniye bekle
+                    delay = 800; 
                 }
             }
 
             setTimeout(typeWriter, delay);
         }
 
-        // Animasyon ve Scroll Efektleri
         document.addEventListener("DOMContentLoaded", () => {
             setTimeout(typeWriter, 500); 
             revealElements(); 
