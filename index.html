@@ -13,9 +13,8 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            /* Arka plan görselini buradan çekiyor. bg.jpg adında bir fotoğraf yüklemelisin */
             background: url('bg.jpg') center/cover no-repeat fixed;
-            background-color: #121212; /* Fotoğraf yüklenene kadar görünecek renk */
+            background-color: #121212; 
             color: #fff;
             display: flex;
             min-height: 100vh;
@@ -77,21 +76,24 @@
             fill: currentColor;
         }
 
-        /* Ana İçerik Alanı */
+        /* Ana İçerik Alanı - ORTALANDI */
         .main-content {
             flex-grow: 1;
             display: flex;
             flex-direction: column;
             gap: 20px;
-            max-width: 1400px;
+            max-width: 1200px; /* Genişlik biraz daraltıldı ki ekranı çok boğmasın */
+            margin: 0 auto; /* Sayfanın geri kalanında tam ortada durmasını sağlar */
         }
 
-        /* Üst Terminal Animasyon Kartı */
+        /* Üst Terminal Animasyon Kartı - ORTALANDI */
         .hero-card {
             padding: 40px;
             display: flex;
-            align-items: center;
+            align-items: center; /* Dikey Ortalama */
+            justify-content: center; /* Yatay Ortalama */
             min-height: 180px;
+            text-align: center;
         }
 
         .typewriter-container {
