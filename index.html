@@ -8,21 +8,27 @@
         body {
             margin: 0;
             padding: 0;
-            height: 100vh;
+            background-color: #121212;
+            color: #e0e0e0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+        }
+
+        /* Üst Kısım - Typewriter Animasyonu */
+        .hero {
+            height: 40vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #121212;
-            color: #e0e0e0;
             font-family: 'Courier New', Courier, monospace;
+            border-bottom: 1px solid #333;
         }
 
         .typewriter-container {
             font-size: 2rem;
             font-weight: 500;
-            white-space: pre-wrap; /* \n karakterinin alt satıra geçmesini sağlar */
             text-align: center;
-            line-height: 1.5;
+            white-space: pre-wrap;
         }
 
         .cursor {
@@ -40,52 +46,170 @@
             50% { opacity: 0; }
         }
 
+        /* İçerik Bölümleri */
+        .content-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 50px 20px;
+        }
+
+        .section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        .section.reverse {
+            flex-direction: row-reverse; /* Fotoğraf solda, yazı sağda */
+        }
+
+        .section img {
+            width: 45%;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            object-fit: cover;
+        }
+
+        .section-text {
+            width: 50%;
+        }
+
+        .section-text h2 {
+            color: #00ffcc;
+            margin-top: 0;
+        }
+
+        /* Sosyal Medya İkonları */
+        .socials {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            padding: 40px 0 60px 0;
+        }
+
+        .socials a {
+            color: #a0a0a0;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+
+        .socials a:hover {
+            color: #00ffcc;
+        }
+
+        .icon {
+            width: 24px;
+            height: 24px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* Mobil Uyumluluk */
         @media (max-width: 768px) {
+            .hero {
+                height: 30vh;
+            }
             .typewriter-container {
                 font-size: 1.2rem;
-                padding: 0 20px;
+            }
+            .section, .section.reverse {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+            .section img, .section-text {
+                width: 100%;
             }
         }
     </style>
 </head>
 <body>
 
-    <div class="typewriter-container">
-        <span id="text"></span><span class="cursor"></span>
+    <!-- Typewriter Efekti -->
+    <div class="hero">
+        <div class="typewriter-container">
+            <span id="text"></span><span class="cursor"></span>
+        </div>
+    </div>
+
+    <!-- İçerik Bölümü -->
+    <div class="content-container">
+        
+        <!-- Birinci Bölüm: Yazı Solda, Fotoğraf Sağda -->
+        <div class="section">
+            <div class="section-text">
+                <h2>Uçuş ve Dron Projeleri</h2>
+                <p>FPV uçuş deneyimlerim, otonom sistemler üzerine çalışmalarım ve dron dünyasına dair heyecan verici projelerim çok yakında burada olacak. Havadan çekilmiş yeni görüntüler ve teknik detaylar için takipte kalın.</p>
+            </div>
+            <!-- Dron fotoğrafının adını buraya yazmalısın. Örn: dron.jpg -->
+            <img src="dron.jpg" alt="Dron Projeleri">
+        </div>
+
+        <!-- İkinci Bölüm: Fotoğraf Solda, Yazı Sağda -->
+        <div class="section reverse">
+            <div class="section-text">
+                <h2>3D Pixel Art Tasarımlar</h2>
+                <p>3D yazıcı ile ürettiğim çok renkli pixel art anahtarlıklar, tasarım süreçlerim ve özel modeller yakında bu sayfada yerini alacak. Hem dijital modelleme hem de fiziksel üretim aşamalarını detaylarıyla paylaşacağım.</p>
+            </div>
+            <!-- Anahtarlık fotoğrafının adını buraya yazmalısın. Örn: anahtarlik.png -->
+            <img src="anahtarlik.jpg" alt="3D Anahtarlık">
+        </div>
+
+    </div>
+
+    <!-- Sosyal Medya İkonları -->
+    <div class="socials">
+        <!-- Instagram -->
+        <a href="https://instagram.com/mirac.krkmz" target="_blank">
+            <svg class="icon" viewBox="0 0 24 24">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+            mirac.krkmz
+        </a>
+        
+        <!-- GitHub -->
+        <a href="https://github.com/mirackorkmaz" target="_blank">
+            <svg class="icon" viewBox="0 0 24 24">
+                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg>
+            mirackorkmaz
+        </a>
     </div>
 
     <script>
-        // \n karakteri metnin ikinci kısmını alt satıra atar
-        const text = "Miraç Korkmaz - Bilgisayar Mühendisi\nYakında yayında...";
-        
+        const text = "Miraç Korkmaz - Bilgisayar Mühendisi\nYakında yeni içeriklerle yayında...";
         let charIndex = 0;
         let isDeleting = false;
         const textElement = document.getElementById("text");
 
         function typeWriter() {
-            // Ekrana yazdırılacak kısmı güncelle
             textElement.textContent = text.substring(0, charIndex);
-            
-            // Hız ayarları (Yazarken 100ms, silerken 50ms)
-            let delay = isDeleting ? 50 : 100;
+            let delay = isDeleting ? 40 : 80;
 
             if (!isDeleting) {
                 charIndex++;
-                // Yazma tamamlandığında 2 saniye bekle ve silmeye geç
                 if (charIndex > text.length) {
                     isDeleting = true;
-                    delay = 2000; 
+                    delay = 3000; 
                 }
             } else {
                 charIndex--;
-                // Silme tamamlandığında yarım saniye bekle ve tekrar yaz
                 if (charIndex === 0) {
                     isDeleting = false;
                     delay = 500; 
                 }
             }
-
-            // Sadece tek bir zamanlayıcı tetiklenir, hızlanma hatası oluşmaz
             setTimeout(typeWriter, delay);
         }
 
@@ -93,6 +217,5 @@
             setTimeout(typeWriter, 1000);
         });
     </script>
-
 </body>
 </html>
