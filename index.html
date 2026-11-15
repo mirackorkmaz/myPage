@@ -19,11 +19,11 @@
             top: -2%; left: -2%; 
             width: 104vw; height: 104vh;
             background: url('bg.jpeg') center/cover no-repeat;
-            filter: blur(5px); /* Bulanıklık 12'den 5'e düşürüldü */
+            filter: blur(5px);
             z-index: -1;
         }
 
-        /* Sol Kenar Çubuğu - Sabitlendi */
+        /* Sol Kenar Çubuğu */
         .sidebar {
             position: fixed;
             top: 20px; bottom: 20px; left: 20px;
@@ -71,13 +71,31 @@
             position: relative;
         }
 
-        /* Ortalanmış Büyük Yazı */
-        .adventure-text {
-            font-size: 8rem;
+        /* Büyütülmüş Dinamik Yazı Alanı */
+        .adventure-text-container {
+            font-size: 10rem; /* Punto 8'den 10'a çıkarıldı */
             font-weight: 800;
             color: #1a1a1a; 
             letter-spacing: -3px;
             text-shadow: 0 10px 30px rgba(255, 255, 255, 0.7);
+            display: flex;
+            align-items: center;
+        }
+
+        /* Büyük Yazı İmleci */
+        .cursor-large {
+            display: inline-block;
+            width: 8px; /* Puntoya uyumlu kalınlık */
+            height: 0.9em;
+            background-color: #1a1a1a;
+            margin-left: 10px;
+            vertical-align: text-bottom;
+            animation: blink 0.8s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
         }
 
         /* Aşağı Kaydır İpucu Animasyonu */
@@ -141,7 +159,7 @@
             border: 1px solid rgba(255, 255, 255, 0.1); margin-top: auto;
         }
 
-        /* JavaScript ile Tetiklenen Kaydırma Animasyonu Sınıfları */
+        /* Kaydırma Animasyonu Sınıfları */
         .reveal {
             opacity: 0;
             transform: translateY(100px);
@@ -159,7 +177,8 @@
             .sidebar { position: static; width: 100%; flex-direction: row; justify-content: space-between; padding: 15px 30px; margin-bottom: 20px; height: auto;}
             .main-wrapper { margin-left: 0; width: 100%; padding: 0 20px; }
             .hero-section { height: 80vh; }
-            .adventure-text { font-size: 4rem; }
+            .adventure-text-container { font-size: 5rem; } /* Mobilde boyut büyütüldü */
+            .cursor-large { width: 4px; margin-left: 6px; }
             .cards-grid { grid-template-columns: 1fr; }
             .content-section { padding: 0 0 100px 0; }
             .scroll-indicator { display: none; }
@@ -168,13 +187,10 @@
 </head>
 <body>
 
-    <!-- Arkaplan Görseli -->
     <div class="bg-image"></div>
 
-    <!-- Sol Kenar Çubuğu (Sabit) -->
     <div class="sidebar">
         <div class="sidebar-logo">MK</div>
-        
         <div class="social-icons">
             <a href="https://instagram.com/mirac.krkmz" target="_blank" title="Instagram: mirac.krkmz">
                 <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
@@ -185,12 +201,13 @@
         </div>
     </div>
 
-    <!-- Ana İçerik Yığını -->
     <div class="main-wrapper">
-        
-        <!-- Tam Ekran Açılış Bölümü -->
         <div class="hero-section">
-            <h1 class="adventure-text">Adventure.</h1>
+            
+            <!-- Dinamik Yazı Alanı -->
+            <h1 class="adventure-text-container">
+                <span id="dynamic-text"></span><span class="cursor-large"></span>
+            </h1>
             
             <div class="scroll-indicator">
                 Keşfet
@@ -198,11 +215,8 @@
             </div>
         </div>
 
-        <!-- Aşağı Kaydırınca Gelecek İçerikler -->
         <div class="content-section">
             <div class="cards-grid">
-                
-                <!-- Sol Kart -->
                 <div class="content-card reveal">
                     <div class="card-text">
                         <h2>Uçuş ve Dron Projeleri</h2>
@@ -211,7 +225,6 @@
                     <img src="dron.jpg" alt="Dron Projeleri" class="card-image">
                 </div>
 
-                <!-- Sağ Kart -->
                 <div class="content-card reveal">
                     <div class="card-text">
                         <h2>3D Pixel Art Tasarımlar</h2>
@@ -219,27 +232,63 @@
                     </div>
                     <img src="anahtarlik.jpg" alt="3D Anahtarlık" class="card-image">
                 </div>
-
             </div>
         </div>
     </div>
 
-    <!-- Kaydırma Animasyonu Kontrol Scripti -->
+    <!-- Çoklu Kelime Yazma Animasyonu Scripti -->
     <script>
+        const words = ["Explore.", "Discover.", "Ascend.", "Adventure."];
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const textElement = document.getElementById("dynamic-text");
+
+        function typeWriter() {
+            const currentWord = words[wordIndex];
+            
+            // Ekrana yazılacak metni ayarla
+            textElement.textContent = currentWord.substring(0, charIndex);
+            
+            // Hız ayarları
+            let delay = isDeleting ? 70 : 130;
+
+            if (!isDeleting) {
+                charIndex++;
+                if (charIndex > currentWord.length) {
+                    isDeleting = true;
+                    delay = 2500; // Kelime tamamlandığında bekleme süresi
+                }
+            } else {
+                charIndex--;
+                if (charIndex === 0) {
+                    isDeleting = false;
+                    wordIndex = (wordIndex + 1) % words.length; // Sonraki kelimeye geç
+                    delay = 800; // Yeni kelimeye başlamadan önce bekleme süresi
+                }
+            }
+
+            setTimeout(typeWriter, delay);
+        }
+
+        // Animasyon ve Scroll efektleri
+        document.addEventListener("DOMContentLoaded", () => {
+            setTimeout(typeWriter, 500); // Sayfa açıldıktan yarım saniye sonra ilk kelime başlar
+            revealElements(); 
+        });
+
         function revealElements() {
             var reveals = document.querySelectorAll('.reveal');
             for (var i = 0; i < reveals.length; i++) {
                 var windowHeight = window.innerHeight;
                 var elementTop = reveals[i].getBoundingClientRect().top;
                 var elementVisible = 100;
-
                 if (elementTop < windowHeight - elementVisible) {
                     reveals[i].classList.add('active');
                 }
             }
         }
         window.addEventListener('scroll', revealElements);
-        revealElements(); 
     </script>
 </body>
 </html>
