@@ -13,13 +13,13 @@
             background-color: #f0f0f0;
         }
 
-        /* Sabit, Bulanık Arkaplan */
+        /* Sabit, Hafif Bulanık Arkaplan */
         .bg-image {
             position: fixed;
-            top: -5%; left: -5%; /* Bulanıklık kenar boşluklarını gizlemek için boyutu %110 yaptık */
-            width: 110vw; height: 110vh;
+            top: -2%; left: -2%; 
+            width: 104vw; height: 104vh;
             background: url('bg.jpeg') center/cover no-repeat;
-            filter: blur(12px); /* Fotoğrafı bulanıklaştıran ayar */
+            filter: blur(5px); /* Bulanıklık 12'den 5'e düşürüldü */
             z-index: -1;
         }
 
@@ -33,7 +33,6 @@
             align-items: center;
             padding: 30px 0;
             z-index: 100;
-            /* Aydınlık arkaplanda okunabilmesi için koyu buzlu cam */
             background: rgba(0, 0, 0, 0.45);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
@@ -56,7 +55,7 @@
 
         /* Ana İçerik Alanı */
         .main-wrapper {
-            margin-left: 120px; /* Sabit sidebar'ın arkasında kalmaması için boşluk */
+            margin-left: 120px;
             width: calc(100% - 120px);
             display: flex;
             flex-direction: column;
@@ -76,9 +75,9 @@
         .adventure-text {
             font-size: 8rem;
             font-weight: 800;
-            color: #1a1a1a; /* Karlı arkaplanda patlaması için koyu renk */
+            color: #1a1a1a; 
             letter-spacing: -3px;
-            text-shadow: 0 10px 30px rgba(255, 255, 255, 0.7); /* Hafif beyaz parlama */
+            text-shadow: 0 10px 30px rgba(255, 255, 255, 0.7);
         }
 
         /* Aşağı Kaydır İpucu Animasyonu */
@@ -104,7 +103,7 @@
             60% { transform: translateY(-7px); }
         }
 
-        /* İçerik Bölümü (Aşağı Kaydırınca Gelenler) */
+        /* İçerik Bölümü */
         .content-section {
             min-height: 100vh;
             padding: 50px 50px 100px 0;
@@ -119,7 +118,7 @@
             gap: 30px;
         }
 
-        /* İçerik Kartları - Koyu Buzlu Cam */
+        /* İçerik Kartları */
         .content-card {
             background: rgba(0, 0, 0, 0.45);
             backdrop-filter: blur(16px);
@@ -156,7 +155,7 @@
 
         /* Mobil Uyumluluk */
         @media (max-width: 900px) {
-            .bg-image { width: 120vw; height: 120vh; }
+            .bg-image { width: 110vw; height: 110vh; }
             .sidebar { position: static; width: 100%; flex-direction: row; justify-content: space-between; padding: 15px 30px; margin-bottom: 20px; height: auto;}
             .main-wrapper { margin-left: 0; width: 100%; padding: 0 20px; }
             .hero-section { height: 80vh; }
@@ -232,7 +231,7 @@
             for (var i = 0; i < reveals.length; i++) {
                 var windowHeight = window.innerHeight;
                 var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 100; // Eleman ekrana 100px girince animasyon başlar
+                var elementVisible = 100;
 
                 if (elementTop < windowHeight - elementVisible) {
                     reveals[i].classList.add('active');
@@ -240,7 +239,7 @@
             }
         }
         window.addEventListener('scroll', revealElements);
-        revealElements(); // Sayfa ilk yüklendiğinde de kontrol et
+        revealElements(); 
     </script>
 </body>
 </html>
