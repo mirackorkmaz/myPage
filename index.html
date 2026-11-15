@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Miraç Korkmaz - Portfolyo</title>
+    <!-- Modern, inovatif ve italik destekli Montserrat fontu eklendi -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
@@ -71,13 +73,15 @@
             position: relative;
         }
 
-        /* Büyütülmüş Dinamik Yazı Alanı */
+        /* Yeni Font ve Renk ile Dinamik Yazı Alanı */
         .adventure-text-container {
-            font-size: 10rem; /* Punto 8'den 10'a çıkarıldı */
+            font-family: 'Montserrat', sans-serif; /* Yeni inovatif font */
+            font-style: italic; /* Eğik duruş eklendi */
+            font-size: 10rem;
             font-weight: 800;
-            color: #1a1a1a; 
-            letter-spacing: -3px;
-            text-shadow: 0 10px 30px rgba(255, 255, 255, 0.7);
+            color: #3b3b3b; /* Daha açık, yumuşak bir siyah/antrasit tonu */
+            letter-spacing: -2px;
+            text-shadow: 0 10px 30px rgba(255, 255, 255, 0.8);
             display: flex;
             align-items: center;
         }
@@ -85,9 +89,9 @@
         /* Büyük Yazı İmleci */
         .cursor-large {
             display: inline-block;
-            width: 8px; /* Puntoya uyumlu kalınlık */
+            width: 8px; 
             height: 0.9em;
-            background-color: #1a1a1a;
+            background-color: #3b3b3b; /* Yazı rengiyle uyumlu hale getirildi */
             margin-left: 10px;
             vertical-align: text-bottom;
             animation: blink 0.8s step-end infinite;
@@ -177,7 +181,7 @@
             .sidebar { position: static; width: 100%; flex-direction: row; justify-content: space-between; padding: 15px 30px; margin-bottom: 20px; height: auto;}
             .main-wrapper { margin-left: 0; width: 100%; padding: 0 20px; }
             .hero-section { height: 80vh; }
-            .adventure-text-container { font-size: 5rem; } /* Mobilde boyut büyütüldü */
+            .adventure-text-container { font-size: 5rem; } 
             .cursor-large { width: 4px; margin-left: 6px; }
             .cards-grid { grid-template-columns: 1fr; }
             .content-section { padding: 0 0 100px 0; }
@@ -204,7 +208,6 @@
     <div class="main-wrapper">
         <div class="hero-section">
             
-            <!-- Dinamik Yazı Alanı -->
             <h1 class="adventure-text-container">
                 <span id="dynamic-text"></span><span class="cursor-large"></span>
             </h1>
@@ -236,7 +239,7 @@
         </div>
     </div>
 
-    <!-- Çoklu Kelime Yazma Animasyonu Scripti -->
+    <!-- Hata Düzeltilmiş Animasyon Scripti -->
     <script>
         const words = ["Explore.", "Discover.", "Ascend.", "Adventure."];
         let wordIndex = 0;
@@ -247,33 +250,39 @@
         function typeWriter() {
             const currentWord = words[wordIndex];
             
-            // Ekrana yazılacak metni ayarla
+            // Ekrana yazılacak metni güncelle
             textElement.textContent = currentWord.substring(0, charIndex);
             
-            // Hız ayarları
-            let delay = isDeleting ? 70 : 130;
+            // Hız ayarları (Yazarken 120ms, Silerken 60ms)
+            let delay = isDeleting ? 60 : 120;
 
             if (!isDeleting) {
-                charIndex++;
-                if (charIndex > currentWord.length) {
+                // Yazma İşlemi
+                if (charIndex < currentWord.length) {
+                    charIndex++;
+                } else {
+                    // Kelime tamamen ekrana yazıldığında 2.5 saniye bekle
                     isDeleting = true;
-                    delay = 2500; // Kelime tamamlandığında bekleme süresi
+                    delay = 2500; 
                 }
             } else {
-                charIndex--;
-                if (charIndex === 0) {
+                // Silme İşlemi
+                if (charIndex > 0) {
+                    charIndex--;
+                } else {
+                    // İlk harf de tamamen silindikten (boş ekran) sonra bekle ve kelime değiştir
                     isDeleting = false;
-                    wordIndex = (wordIndex + 1) % words.length; // Sonraki kelimeye geç
-                    delay = 800; // Yeni kelimeye başlamadan önce bekleme süresi
+                    wordIndex = (wordIndex + 1) % words.length; 
+                    delay = 800; // Boş imleç ekranında 0.8 saniye bekle
                 }
             }
 
             setTimeout(typeWriter, delay);
         }
 
-        // Animasyon ve Scroll efektleri
+        // Animasyon ve Scroll Efektleri
         document.addEventListener("DOMContentLoaded", () => {
-            setTimeout(typeWriter, 500); // Sayfa açıldıktan yarım saniye sonra ilk kelime başlar
+            setTimeout(typeWriter, 500); 
             revealElements(); 
         });
 
